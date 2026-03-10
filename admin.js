@@ -159,39 +159,117 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    // Sample products data
+    const products = [
+        { id: 1, name: 'Cropped Jacket (Black)', sku: 'II10', category: 'Jackets', priceBefore: 2000, priceAfter: 699, stock: 42, sizes: ['S','M','L','XL'], pinned: true },
+        { id: 2, name: 'Oversized Tee (White)', sku: 'OT22', category: 'T-Shirts', priceBefore: 450, priceAfter: 299, stock: 120, sizes: ['S','M','L','XL','XXL'], pinned: false },
+        { id: 3, name: 'Winter Hoodie (Grey)', sku: 'WH55', category: 'Hoodies', priceBefore: 1200, priceAfter: 850, stock: 18, sizes: ['M','L','XL'], pinned: false },
+    ];
+
     function renderProducts() {
+        const discPct = (b, a) => Math.round(((b - a) / b) * 100);
         viewContent.innerHTML = `
             <div class="card-header">
                 <h2>Product Inventory</h2>
                 <div style="display:flex; gap:15px;">
-                    <button class="add-btn" style="background:var(--card-bg); border:1px solid var(--border-color); color:white;"><i class="fa-solid fa-sort"></i> Reorder Items</button>
+                    <button class="add-btn" style="background:var(--card-bg); border:1px solid var(--border-color); color:white;"><i class="fa-solid fa-sort"></i> Reorder</button>
                     <button class="add-btn" onclick="openProductModal()"><i class="fa-solid fa-plus"></i> Add Product</button>
                 </div>
             </div>
-            <div class="products-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-                <div class="product-admin-card" style="background:var(--card-bg); padding:20px; border-radius:20px; border:1px solid var(--border-color); position:relative;">
-                    <div style="position:absolute; top:20px; left:20px; z-index:10;"><i class="fa-solid fa-thumbtack" style="color:var(--accent-green); cursor:pointer; background:rgba(0,0,0,0.5); padding:6px; border-radius:8px;" title="Pinned to Home"></i></div>
-                    <div class="prod-img" style="width:100%; height:200px; background:rgba(255,255,255,0.03); border-radius:15px; display:flex; align-items:center; justify-content:center; margin-bottom:15px;">
-                        <i class="fa-solid fa-shirt" style="font-size:3rem; opacity:0.1;"></i>
+            <div class="products-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+                ${products.map(p => `
+                <div onclick="openProductDetailModal(${p.id})" style="background:var(--card-bg); padding:20px; border-radius:20px; border:1px solid var(--border-color); position:relative; cursor:pointer; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--accent-green)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='translateY(0)'">
+                    ${p.pinned ? `<div style="position:absolute; top:15px; left:15px; z-index:10;"><i class="fa-solid fa-thumbtack" style="color:var(--accent-green); background:rgba(0,0,0,0.5); padding:6px; border-radius:8px;" title="Pinned to Homepage"></i></div>` : ''}
+                    <div style="width:100%; height:190px; background:rgba(255,255,255,0.03); border-radius:15px; display:flex; align-items:center; justify-content:center; margin-bottom:15px; position:relative;">
+                        <i class="fa-solid fa-shirt" style="font-size:3rem; opacity:0.08;"></i>
+                        <span style="position:absolute; top:10px; right:10px; background:var(--accent-red); font-size:0.7rem; padding:3px 8px; border-radius:8px;">${discPct(p.priceBefore, p.priceAfter)}% OFF</span>
                     </div>
-                    <h3>Cropped Jacket (Black)</h3>
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin:5px 0;">SKU: II10 | Cat: Jackets</p>
-                    <div style="display:flex; align-items:center; gap:10px; margin:10px 0;">
-                        <span style="font-weight:700; color:var(--accent-green);">LE 699</span>
-                        <span style="text-decoration:line-through; opacity:0.5; font-size:0.8rem;">LE 2,000</span>
-                        <span style="background:var(--accent-red); font-size:0.7rem; padding:2px 6px; border-radius:5px;">65% OFF</span>
+                    <h3 style="font-size:1rem; margin-bottom:5px;">${p.name}</h3>
+                    <p style="font-size:0.78rem; opacity:0.5; margin-bottom:10px;">SKU: ${p.sku} | ${p.category}</p>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-weight:700; color:var(--accent-green);">LE ${p.priceAfter}</span>
+                        <span style="text-decoration:line-through; opacity:0.4; font-size:0.8rem;">LE ${p.priceBefore}</span>
                     </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding-top:15px; border-top:1px solid var(--border-color);">
-                        <span class="status-label shipped">In Stock: 42</span>
-                        <div class="actions">
-                            <i class="fa-solid fa-pen-to-square" style="cursor:pointer; margin-right:12px;"></i>
-                            <i class="fa-solid fa-trash" style="cursor:pointer; color:var(--accent-red);"></i>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px; padding-top:12px; border-top:1px solid var(--border-color);">
+                        <span class="status-label ${p.stock > 0 ? 'shipped' : 'cancelled'}" style="font-size:0.7rem;">Stock: ${p.stock}</span>
+                        <div onclick="event.stopPropagation()">
+                            <i class="fa-solid fa-pen-to-square" style="cursor:pointer; margin-right:12px; opacity:0.6;"></i>
+                            <i class="fa-solid fa-trash" style="cursor:pointer; color:var(--accent-red); opacity:0.6;"></i>
                         </div>
+                    </div>
+                </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    window.openProductDetailModal = function(productId) {
+        const p = [{ id: 1, name: 'Cropped Jacket (Black)', sku: 'II10', category: 'Jackets', priceBefore: 2000, priceAfter: 699, stock: 42, sizes: ['S','M','L','XL'], pinned: true, desc: 'Premium quality cropped jacket, perfect for casual outings. Made from high-grade fabric with a modern slim cut.' },
+                   { id: 2, name: 'Oversized Tee (White)', sku: 'OT22', category: 'T-Shirts', priceBefore: 450, priceAfter: 299, stock: 120, sizes: ['S','M','L','XL','XXL'], pinned: false, desc: 'Comfortable oversized t-shirt. 100% cotton with a relaxed fit. Perfect for everyday wear.' },
+                   { id: 3, name: 'Winter Hoodie (Grey)', sku: 'WH55', category: 'Hoodies', priceBefore: 1200, priceAfter: 850, stock: 18, sizes: ['M','L','XL'], pinned: false, desc: 'Warm and cozy winter hoodie. Fleece lining for extra warmth. Kangaroo pocket with drawstring hood.' }]
+            .find(x => x.id === productId);
+        if (!p) return;
+
+        const disc = Math.round(((p.priceBefore - p.priceAfter) / p.priceBefore) * 100);
+        const modal = document.getElementById('orderModal');
+        const modalContent = modal.querySelector('.modal-content');
+        modal.style.display = 'block';
+
+        modalContent.innerHTML = `
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap:40px;">
+                <!-- Left: Image Gallery -->
+                <div>
+                    <div style="width:100%; height:320px; background:rgba(255,255,255,0.03); border-radius:20px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border-color); margin-bottom:15px;">
+                        <i class="fa-solid fa-shirt" style="font-size:6rem; opacity:0.08;"></i>
+                    </div>
+                    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px;">
+                        ${[1,2,3,4].map(i => `<div style="height:65px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center;"><i class="fa-solid fa-image" style="opacity:0.08;"></i></div>`).join('')}
+                    </div>
+                    <div style="margin-top:20px; display:flex; gap:10px;">
+                        ${p.pinned
+                            ? `<div style="display:flex; align-items:center; gap:8px; padding:10px 15px; background:rgba(128,214,17,0.1); border:1px solid var(--accent-green); border-radius:10px; font-size:0.8rem; color:var(--accent-green);"><i class="fa-solid fa-thumbtack"></i> Pinned to Homepage</div>`
+                            : `<button style="padding:10px 15px; background:none; border:1px solid var(--border-color); color:white; border-radius:10px; font-size:0.8rem; cursor:pointer;"><i class="fa-solid fa-thumbtack"></i> Pin to Homepage</button>`}
+                    </div>
+                </div>
+
+                <!-- Right: Product Info -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                        <div>
+                            <span style="font-size:0.75rem; opacity:0.5; letter-spacing:1px; text-transform:uppercase;">${p.category} · SKU: ${p.sku}</span>
+                            <h2 style="font-size:1.6rem; margin:8px 0;">${p.name}</h2>
+                        </div>
+                        <span style="background:var(--accent-red); padding:6px 12px; border-radius:10px; font-weight:700; font-size:0.9rem;">${disc}% OFF</span>
+                    </div>
+
+                    <p style="font-size:0.9rem; line-height:1.7; opacity:0.7; margin-bottom:25px;">${p.desc}</p>
+
+                    <div style="display:flex; align-items:baseline; gap:15px; margin-bottom:25px;">
+                        <span style="font-size:2rem; font-weight:800; color:var(--accent-green);">LE ${p.priceAfter}</span>
+                        <span style="text-decoration:line-through; opacity:0.4; font-size:1.1rem;">LE ${p.priceBefore}</span>
+                    </div>
+
+                    <div style="margin-bottom:25px;">
+                        <p style="font-size:0.8rem; opacity:0.5; margin-bottom:12px; letter-spacing:1px;">AVAILABLE SIZES</p>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            ${p.sizes.map(s => `<div style="width:50px; height:50px; border:1px solid var(--border-color); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; cursor:pointer; transition:0.2s;" onmouseover="this.style.borderColor='var(--accent-green)'" onmouseout="this.style.borderColor='var(--border-color)'">${s}</div>`).join('')}
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; padding:20px; background:rgba(255,255,255,0.02); border-radius:15px; border:1px solid var(--border-color); margin-bottom:25px;">
+                        <div><p style="font-size:0.75rem; opacity:0.5;">STOCK</p><p style="font-size:1.4rem; font-weight:700; color:${p.stock < 20 ? 'var(--accent-red)' : 'var(--accent-green)'}">${p.stock} units</p></div>
+                        <div><p style="font-size:0.75rem; opacity:0.5;">SAVED AMOUNT</p><p style="font-size:1.4rem; font-weight:700;">LE ${p.priceBefore - p.priceAfter}</p></div>
+                    </div>
+
+                    <div style="display:flex; gap:15px;">
+                        <button class="add-btn" style="flex:1; padding:16px;" onclick="closeModal()"><i class="fa-solid fa-pen-to-square"></i> Edit Product</button>
+                        <button style="padding:16px 20px; background:none; border:1px solid var(--accent-red); color:var(--accent-red); border-radius:12px; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 </div>
             </div>
         `;
-    }
+    };
 
     function renderOffers() {
         viewContent.innerHTML = `
