@@ -36,8 +36,11 @@ loginForm.addEventListener('submit', async (e) => {
         window.location.replace('admin.html');
     } catch (error) {
         console.error('Firebase Auth Error:', error.code, error.message);
-        // Show exact error code for debugging
-        showError('Error: ' + error.code);
+        const msg = ['auth/wrong-password', 'auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-email']
+            .includes(error.code)
+            ? 'Invalid email or password.'
+            : 'Login failed: ' + error.code;
+        showError(msg);
     } finally {
         setLoading(false);
     }

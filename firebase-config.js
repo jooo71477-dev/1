@@ -3,13 +3,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPasswor
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBy6UIqxLi1p9cEIc_e74PWQdiXqAXfCME",
-    authDomain: "icloth-4c1d5.firebaseapp.com",
-    projectId: "icloth-4c1d5",
-    storageBucket: "icloth-4c1d5.firebasestorage.app",
-    messagingSenderId: "281323343235",
-    appId: "1:281323343235:web:04ed00bc424137bfd5bab6",
-    measurementId: "G-S8P5NVNK8Q"
+    apiKey: "AIzaSyByPZP1qo0sQN26xTwzpT0vnw_BTguXvSI",
+    authDomain: "ic12-e6ad7.firebaseapp.com",
+    projectId: "ic12-e6ad7",
+    storageBucket: "ic12-e6ad7.firebasestorage.app",
+    messagingSenderId: "849964207533",
+    appId: "1:849964207533:web:8a6669e5c453ca08ba2524",
+    measurementId: "G-H7S7W0CB7Q"
 };
 
 const app = initializeApp(firebaseConfig);
