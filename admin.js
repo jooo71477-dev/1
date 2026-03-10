@@ -52,27 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function renderSection(section) {
         currentSection = section;
-        viewContent.innerHTML = '<div class="loading-state">Loading...</div>';
-
-        switch (section) {
-            case 'overview':
-                await renderOverview();
-                break;
-            case 'orders':
-                await renderOrders();
-                break;
-            case 'products':
-                await renderProducts();
-                break;
-            case 'customers':
-                await renderCustomers();
-                break;
-            case 'settings':
-                await renderSettings();
-                break;
-            default:
-                viewContent.innerHTML = `<div class="empty-view">Section ${section} coming soon...</div>`;
-        }
+        viewContent.innerHTML = `
+            <div class="coming-soon-wrapper">
+                <div class="coming-soon-card">
+                    <div class="cs-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <h2>${section.charAt(0).toUpperCase() + section.slice(1)} Section</h2>
+                    <p>This module is currently under development. Stay tuned for updates!</p>
+                    <div class="coming-soon-progress">
+                        <div class="cs-bar"></div>
+                    </div>
+                    <span class="cs-tag">GAMING SOON</span>
+                </div>
+            </div>
+        `;
     }
 
     // --- OVERVIEW SECTION ---

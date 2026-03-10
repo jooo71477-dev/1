@@ -284,118 +284,47 @@
       .cats-grid { grid-template-columns: repeat(2, 1fr); }
       .features, .categories-section { padding-inline: 20px; }
     }
-
-    @media (max-width: 480px) {
-      .hero-title { letter-spacing: -2px; }
-      .cats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    }
   </style>
+  <link rel="stylesheet" href="sketch-ui.css">
 </head>
 <body>
 
   <!-- HEADER (injected by JS) -->
   <div id="header-mount"></div>
 
-  <!-- ████ HERO ████ -->
-  <section class="hero">
-    <div class="hero-content">
-      <span class="hero-eyebrow" data-i18n="tagline">متجر الملابس الراقية</span>
-
-      <h1 class="hero-title" onclick="window.location.href='shop.html'">ICLOTH</h1>
-
-      <p class="hero-sub" data-i18n="sub_tagline">جودة تشعر بها</p>
-
-      <div class="hero-cta">
-        <a href="shop.html" class="btn btn-primary">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span data-i18n="shop_btn">تسوق الآن</span>
-        </a>
-        <a href="#features" class="btn btn-outline">
-          <span data-i18n="nav_about">من نحن</span>
-        </a>
-      </div>
+  <!-- ████ SKETCH HERO ████ -->
+  <section class="sketch-hero">
+    <div class="ad-box">
+        <span class="label" data-i18n="ad_example">إعلان مثال</span>
+        <h1 data-i18n="ad_text">إشترى قطعتين واحصل على هدية</h1>
+        <div class="sub">
+            <svg width="100" height="20" viewBox="0 0 100 20" style="margin: 0 auto;">
+                <path d="M0,10 Q25,0 50,10 T100,10" fill="none" stroke="var(--sketch-red)" stroke-width="2"/>
+            </svg>
+        </div>
     </div>
 
-    <!-- Marquee -->
-    <div class="marquee-wrap">
-      <div class="marquee-track" id="marqueeTrack"></div>
-    </div>
+    <div class="big-discount" data-i18n="big_discount">أقوى خصومات</div>
   </section>
 
-  <!-- ████ FEATURES ████ -->
-  <section id="features">
-    <div class="features">
-      <div style="text-align:center; margin-bottom:48px;">
-        <span class="section-label">WHY ICLOTH</span>
-        <h2 class="section-title" id="featuresTitle">لماذا تختارنا؟</h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
-          <h3 id="feat1Title">شحن سريع</h3>
-          <p id="feat1Sub">توصيل لجميع محافظات مصر خلال 24-72 ساعة بأفضل الأسعار.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <h3 id="feat2Title">جودة مضمونة</h3>
-          <p id="feat2Sub">كل منتج يمر بفحص جودة دقيق قبل الشحن لضمان رضاك التام.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
-          <h3 id="feat3Title">إرجاع مجاني</h3>
-          <p id="feat3Sub">غير راضٍ؟ أرجع المنتج خلال 14 يوم بدون أي رسوم إضافية.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ████ CATEGORIES ████ -->
-  <section>
-    <div class="categories-section">
-      <div class="section-header">
-        <div>
-          <span class="section-label">CATEGORIES</span>
-          <h2 class="section-title" id="catsTitle">تسوق حسب الفئة</h2>
-        </div>
-        <a href="shop.html" class="btn btn-ghost" id="viewAllBtn">
-          <span data-i18n="nav_shop">المتجر</span>
-          <i class="fa-solid fa-arrow-left" id="viewAllArrow"></i>
-        </a>
-      </div>
-      <div class="cats-grid">
-        <a href="shop.html?cat=jackets" class="cat-card">
-          <span class="cat-icon">🧥</span>
-          <h4 id="cat1">جاكيتات</h4>
-          <p id="cat1sub">مجموعة شتوية</p>
-        </a>
-        <a href="shop.html?cat=tshirts" class="cat-card">
-          <span class="cat-icon">👕</span>
-          <h4 id="cat2">تيشرتات</h4>
-          <p id="cat2sub">راحة وستايل</p>
-        </a>
-        <a href="shop.html?cat=hoodies" class="cat-card">
-          <span class="cat-icon">🤍</span>
-          <h4 id="cat3">هوديز</h4>
-          <p id="cat3sub">دافئة وأنيقة</p>
-        </a>
-        <a href="shop.html?cat=pants" class="cat-card">
-          <span class="cat-icon">👖</span>
-          <h4 id="cat4">بناطيل</h4>
-          <p id="cat4sub">كلاسيك ومريح</p>
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- BOTTOM NAV (injected by JS) -->
+  <div id="bottom-nav-mount"></div>
 
   <!-- FOOTER (injected by JS) -->
   <div id="footer-mount"></div>
 
   <script type="module">
-    import { initLang, initPWA, buildHeader, buildFooter, TRANSLATIONS, currentLang } from './i18n.js';
+    import { initLang, initPWA, buildHeader, buildFooter, buildBottomNav, TRANSLATIONS, currentLang } from './i18n.js';
 
-    // Inject header & footer
-    document.getElementById('header-mount').innerHTML = buildHeader('home');
-    document.getElementById('footer-mount').innerHTML = buildFooter();
+    // Inject header, footer & bottom nav
+    function injectUI(lang) {
+      document.getElementById('header-mount').innerHTML = buildHeader('home');
+      document.getElementById('footer-mount').innerHTML = buildFooter();
+      document.getElementById('bottom-nav-mount').innerHTML = buildBottomNav('home');
+    }
+
+    // Initial injection
+    injectUI(currentLang);
 
     // Init language & PWA
     initLang();
@@ -416,25 +345,25 @@
       const t = TRANSLATIONS[lang];
       const isAr = lang === 'ar';
 
-      document.getElementById('featuresTitle').textContent = isAr ? 'لماذا تختارنا؟' : 'Why Choose Us?';
-      document.getElementById('feat1Title').textContent = isAr ? 'شحن سريع' : 'Fast Shipping';
-      document.getElementById('feat1Sub').textContent = isAr ? 'توصيل لجميع محافظات مصر خلال 24-72 ساعة بأفضل الأسعار.' : 'Delivery across Egypt within 24-72 hours at the best rates.';
-      document.getElementById('feat2Title').textContent = isAr ? 'جودة مضمونة' : 'Guaranteed Quality';
-      document.getElementById('feat2Sub').textContent = isAr ? 'كل منتج يمر بفحص جودة دقيق قبل الشحن.' : 'Every product passes quality inspection before shipping.';
-      document.getElementById('feat3Title').textContent = isAr ? 'إرجاع مجاني' : 'Free Returns';
-      document.getElementById('feat3Sub').textContent = isAr ? 'إرجع المنتج خلال 14 يوم بدون رسوم.' : 'Return within 14 days, no questions asked.';
-      document.getElementById('catsTitle').textContent = isAr ? 'تسوق حسب الفئة' : 'Shop by Category';
-      document.getElementById('cat1').textContent = isAr ? 'جاكيتات' : 'Jackets';
-      document.getElementById('cat1sub').textContent = isAr ? 'مجموعة شتوية' : 'Winter Collection';
-      document.getElementById('cat2').textContent = isAr ? 'تيشرتات' : 'T-Shirts';
-      document.getElementById('cat2sub').textContent = isAr ? 'راحة وستايل' : 'Comfort & Style';
-      document.getElementById('cat3').textContent = isAr ? 'هوديز' : 'Hoodies';
-      document.getElementById('cat3sub').textContent = isAr ? 'دافئة وأنيقة' : 'Warm & Stylish';
-      document.getElementById('cat4').textContent = isAr ? 'بناطيل' : 'Pants';
-      document.getElementById('cat4sub').textContent = isAr ? 'كلاسيك ومريح' : 'Classic & Comfy';
-      document.getElementById('viewAllArrow').className = isAr ? 'fa-solid fa-arrow-left' : 'fa-solid fa-arrow-right';
+      if (document.getElementById('featuresTitle')) document.getElementById('featuresTitle').textContent = isAr ? 'لماذا تختارنا؟' : 'Why Choose Us?';
+      if (document.getElementById('feat1Title')) document.getElementById('feat1Title').textContent = isAr ? 'شحن سريع' : 'Fast Shipping';
+      if (document.getElementById('feat1Sub')) document.getElementById('feat1Sub').textContent = isAr ? 'توصيل لجميع محافظات مصر خلال 24-72 ساعة بأفضل الأسعار.' : 'Delivery across Egypt within 24-72 hours at the best rates.';
+      if (document.getElementById('feat2Title')) document.getElementById('feat2Title').textContent = isAr ? 'جودة مضمونة' : 'Guaranteed Quality';
+      if (document.getElementById('feat2Sub')) document.getElementById('feat2Sub').textContent = isAr ? 'كل منتج يمر بفحص جودة دقيق قبل الشحن.' : 'Every product passes quality inspection before shipping.';
+      if (document.getElementById('feat3Title')) document.getElementById('feat3Title').textContent = isAr ? 'إرجاع مجاني' : 'Free Returns';
+      if (document.getElementById('feat3Sub')) document.getElementById('feat3Sub').textContent = isAr ? 'إرجع المنتج خلال 14 يوم بدون رسوم.' : 'Return within 14 days, no questions asked.';
+      if (document.getElementById('catsTitle')) document.getElementById('catsTitle').textContent = isAr ? 'تسوق حسب الفئة' : 'Shop by Category';
+      if (document.getElementById('cat1')) document.getElementById('cat1').textContent = isAr ? 'جاكيتات' : 'Jackets';
+      if (document.getElementById('cat1sub')) document.getElementById('cat1sub').textContent = isAr ? 'مجموعة شتوية' : 'Winter Collection';
+      if (document.getElementById('cat2')) document.getElementById('cat2').textContent = isAr ? 'تيشرتات' : 'T-Shirts';
+      if (document.getElementById('cat2sub')) document.getElementById('cat2sub').textContent = isAr ? 'راحة وستايل' : 'Comfort & Style';
+      if (document.getElementById('cat3')) document.getElementById('cat3').textContent = isAr ? 'هوديز' : 'Hoodies';
+      if (document.getElementById('cat3sub')) document.getElementById('cat3sub').textContent = isAr ? 'دافئة وأنيقة' : 'Warm & Stylish';
+      if (document.getElementById('cat4')) document.getElementById('cat4').textContent = isAr ? 'بناطيل' : 'Pants';
+      if (document.getElementById('cat4sub')) document.getElementById('cat4sub').textContent = isAr ? 'كلاسيك ومريح' : 'Classic & Comfy';
+      if (document.getElementById('viewAllArrow')) document.getElementById('viewAllArrow').className = isAr ? 'fa-solid fa-arrow-left' : 'fa-solid fa-arrow-right';
 
-      buildMarquee(t);
+      if (document.getElementById('marqueeTrack')) buildMarquee(t);
     }
 
     // Initial render + listen for lang changes
@@ -443,15 +372,7 @@
 
     document.addEventListener('langchange', (e) => {
       updatePageText(e.detail.lang);
-      // Re-inject header & footer with new lang
-      document.getElementById('header-mount').innerHTML = buildHeader('home');
-      document.getElementById('footer-mount').innerHTML = buildFooter();
-      // Re-attach lang toggle listeners after re-inject
-      document.querySelectorAll('.lang-toggle button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          import('./i18n.js').then(m => m.applyLang(btn.dataset.lang));
-        });
-      });
+      injectUI(e.detail.lang);
       initPWA();
     });
   </script>

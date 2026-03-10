@@ -175,34 +175,77 @@ function hidePwaOverlay() {
   document.getElementById('pwaOverlay')?.classList.remove('show');
 }
 
-// Shared header builder
+// Shared header builder (Redesigned based on sketch)
 function buildHeader(activePage = 'home') {
-  const pages = [
-    { key: 'nav_home',    href: 'index.html', id: 'home' },
-    { key: 'nav_shop',    href: 'shop.html',  id: 'shop' },
-    { key: 'nav_about',   href: '#about',      id: 'about' },
-    { key: 'nav_contact', href: '#contact',    id: 'contact' },
-  ];
+  const t = TRANSLATIONS[currentLang];
+  const isAr = currentLang === 'ar';
 
   return `
-  <header class="site-header">
-    <a href="index.html" class="header-logo">
-      <img src="logo/logo2..png" alt="ICLOTH">
-    </a>
-    <nav class="header-nav">
-      ${pages.map(p => `
-        <a href="${p.href}" class="${p.id === activePage ? 'active' : ''}" data-i18n="${p.key}">${TRANSLATIONS[currentLang][p.key]}</a>
-      `).join('')}
-    </nav>
-    <div class="header-actions">
-      <div class="lang-toggle">
-        <button data-lang="ar" ${currentLang === 'ar' ? 'class="active"' : ''}>ع</button>
-        <button data-lang="en" ${currentLang === 'en' ? 'class="active"' : ''}>EN</button>
+  <header class="sketch-header">
+    <div class="header-top">
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="${isAr ? 'بحث عن منتجات...' : 'Search products...'}">
       </div>
-      <a href="shop.html" class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a href="#" class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></a>
+      
+      <nav class="header-links">
+        <a href="shop.html?tag=sale" class="sale-link">${isAr ? 'تخفيضات' : 'Sale'}</a>
+        <a href="shop.html?sort=newest">${isAr ? 'وصل حديثاً' : 'New Arrivals'}</a>
+        <a href="shop.html?cat=women">${isAr ? 'نساء' : 'Women'}</a>
+        <a href="shop.html?cat=men">${isAr ? 'رجال' : 'Men'}</a>
+        <a href="shop.html?cat=kids">${isAr ? 'أطفال' : 'Kids'}</a>
+      </nav>
+
+      <div class="lang-switch">
+        <button onclick="import('./i18n.js').then(m => m.applyLang('en'))" class="${currentLang === 'en' ? 'active' : ''}">English</button>
+        <span>|</span>
+        <button onclick="import('./i18n.js').then(m => m.applyLang('ar'))" class="${currentLang === 'ar' ? 'active' : ''}">العربية</button>
+      </div>
+    </div>
+
+    <div class="header-main">
+      <div class="header-icons-left">
+        <a href="#" class="icon-link"><i class="fa-regular fa-heart"></i><span class="icon-label">${isAr ? 'مفضلة' : 'Wishlist'}</span></a>
+        <a href="#" class="icon-link"><i class="fa-solid fa-cart-shopping"></i><span class="icon-label">${isAr ? 'سلة' : 'Cart'}</span></a>
+      </div>
+
+      <a href="index.html" class="sketch-logo">
+        <img src="logo/logo2..png" alt="ICLOTH">
+      </a>
+
+      <div class="header-spacer"></div>
     </div>
   </header>`;
+}
+
+// Shared bottom nav builder (New)
+function buildBottomNav(activePage = 'home') {
+  const t = TRANSLATIONS[currentLang];
+  const isAr = currentLang === 'ar';
+
+  return `
+  <nav class="sketch-bottom-nav">
+    <a href="index.html" class="nav-item ${activePage === 'home' ? 'active' : ''}">
+      <i class="fa-solid fa-house"></i>
+      <span>${isAr ? 'الرئيسية' : 'Home'}</span>
+    </a>
+    <a href="shop.html" class="nav-item ${activePage === 'shop' ? 'active' : ''}">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>${isAr ? 'الأقسام' : 'Categories'}</span>
+    </a>
+    <a href="shop.html?tag=offers" class="nav-item">
+      <i class="fa-solid fa-percent"></i>
+      <span>${isAr ? 'العروض' : 'Offers'}</span>
+    </a>
+    <a href="#" class="nav-item">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span>${isAr ? 'السلة' : 'Cart'}</span>
+    </a>
+    <button class="nav-item" onclick="import('./i18n.js').then(m => m.applyLang('${currentLang === 'ar' ? 'en' : 'ar'}'))">
+      <i class="fa-solid fa-globe"></i>
+      <span>${currentLang === 'ar' ? 'EN' : 'AR'}</span>
+    </button>
+  </nav>`;
 }
 
 // Shared footer builder
@@ -264,4 +307,4 @@ function buildFooter() {
   </div>`;
 }
 
-export { initLang, initPWA, buildHeader, buildFooter, applyLang, currentLang, TRANSLATIONS };
+export { initLang, initPWA, buildHeader, buildFooter, buildBottomNav, applyLang, currentLang, TRANSLATIONS };
