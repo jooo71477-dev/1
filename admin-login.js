@@ -33,7 +33,8 @@ loginForm.addEventListener('submit', async (e) => {
         await signInWithEmailAndPassword(auth, email, password);
         window.location.replace('admin.html');
     } catch (error) {
-        const msg = error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found'
+        const msg = ['auth/wrong-password', 'auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-email']
+            .includes(error.code)
             ? 'Invalid email or password.'
             : 'Login failed. Please try again.';
         showError(msg);
