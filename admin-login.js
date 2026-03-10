@@ -1,6 +1,7 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
 
-const ADMIN_EMAIL = 'mm13@gmail.com';
+// Single source of truth for admin email
+const ADMIN_EMAIL = 'm13@gmail.com';
 
 // If already logged in as admin, skip the login page
 onAuthStateChanged(auth, (user) => {
