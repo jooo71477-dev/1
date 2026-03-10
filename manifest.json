@@ -1,0 +1,28 @@
+{
+    "name": "ICLOTH - Premium Clothing Store",
+    "short_name": "ICLOTH",
+    "description": "Premium clothing store in Kafr Shukr. Discover the latest fashion trends.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "logo/logo2..png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "logo/logo2..png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["shopping", "lifestyle"],
+    "lang": "ar",
+    "dir": "rtl",
+    "screenshots": []
+}

@@ -30,20 +30,42 @@ html {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-        url('./back/Screenshot 2026-03-10 022955.png') center/cover no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 40px;
-    animation: zoomInBg 20s infinite alternate linear;
+    padding: 40px 40px 20px;
 }
 
-header.hero-header {
+/* No background image variant */
+.hero-no-bg {
+    background: #000;
+    overflow: hidden;
+}
+
+.hero-no-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(194, 33, 58, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(194, 33, 58, 0.07), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(194, 33, 58, 0.07), transparent);
+    pointer-events: none;
+    animation: subtleGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+    from { opacity: 0.7; }
+    to   { opacity: 1; }
+}
+
+header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 .top-left-nav ul {
@@ -55,47 +77,53 @@ header.hero-header {
 .top-left-nav ul li a {
     text-decoration: none;
     color: var(--text-color);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: 2px;
-    opacity: 0.8;
+    letter-spacing: 3px;
+    opacity: 0.6;
     transition: 0.3s;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .top-left-nav ul li a:hover {
     opacity: 1;
+    color: #c2213a;
 }
 
-.top-center-brand {
+/* Center Logo */
+.top-center-logo {
     position: absolute;
-    top: 40px;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.subtitle-top {
-    font-size: 1.3rem;
-    font-weight: 400;
-    letter-spacing: 6px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+.brand-logo {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1);
+    transition: filter 0.3s, transform 0.3s;
 }
 
-.tagline {
-    font-size: 0.85rem;
-    font-weight: 300;
-    letter-spacing: 1px;
-    opacity: 0.8;
+.brand-logo:hover {
+    filter: drop-shadow(0 0 8px rgba(194, 33, 58, 0.6));
+    transform: scale(1.04);
 }
 
+.placeholder-right {
+    width: 120px;
+}
+
+/* Big brand name at bottom */
 .bottom-brand {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    position: relative;
+    z-index: 2;
 }
 
 .bottom-brand h1 {
@@ -105,42 +133,186 @@ header.hero-header {
     letter-spacing: -4px;
     line-height: 0.8;
     margin-bottom: -1rem;
-    text-shadow: 2px 5px 30px rgba(0, 0, 0, 0.4);
-    mask-image: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1));
-    -webkit-mask-image: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1));
-    opacity: 0.95;
+    text-shadow: 0 0 80px rgba(194, 33, 58, 0.2);
+    mask-image: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
+    -webkit-mask-image: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
+    opacity: 0.9;
     pointer-events: auto;
+    animation: fadeInUp 1s ease-out forwards;
 }
 
 .shop-now-btn {
     position: absolute;
-    bottom: 10%;
+    bottom: 18%;
     left: 50%;
     transform: translateX(-50%);
     color: white;
     text-decoration: none;
-    border: 1px solid white;
-    padding: 15px 40px;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 14px 42px;
     letter-spacing: 4px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     background: transparent;
     transition: 0.4s;
+    z-index: 3;
 }
 
 .shop-now-btn:hover {
     background: white;
     color: black;
+    border-color: white;
 }
 
+/* Site Footer (index page bottom buttons) */
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 10px 0 4px;
+    position: relative;
+    z-index: 10;
+}
 
-@keyframes zoomInBg {
-    from {
-        background-size: 100%;
-    }
+.footer-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: none;
+    font-family: var(--primary-font);
+}
 
-    to {
-        background-size: 105%;
-    }
+.pwa-btn {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pwa-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+    border-color: rgba(255,255,255,0.35);
+}
+
+.admin-btn {
+    background: rgba(194, 33, 58, 0.12);
+    border: 1px solid rgba(194, 33, 58, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-btn:hover {
+    background: rgba(194, 33, 58, 0.25);
+    border-color: #c2213a;
+    color: white;
+}
+
+/* PWA Install Prompt */
+.pwa-prompt {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.pwa-prompt-content {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+.pwa-icon {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    padding: 8px;
+}
+
+.pwa-text h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    direction: rtl;
+}
+
+.pwa-text p {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    direction: rtl;
+}
+
+.pwa-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.pwa-install-btn {
+    flex: 1;
+    padding: 13px;
+    background: #c2213a;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.pwa-install-btn:hover {
+    background: #e02545;
+}
+
+.pwa-dismiss-btn {
+    flex: 1;
+    padding: 13px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.pwa-dismiss-btn:hover {
+    background: rgba(255,255,255,0.14);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 0.9; transform: translateY(0); }
 }
 
 /* PRODUCT PAGE STYLES */

@@ -5,28 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICLOTH | Premium Clothing Store</title>
+    <meta name="description" content="ICLOTH - Premium clothing store in Kafr Shukr. Discover the latest fashion trends.">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="logo/logo2..png">
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="hero">
+    <div class="hero hero-no-bg">
         <header>
             <nav class="top-left-nav">
                 <ul>
-                    <li><a href="#home">HOME</a></li>
+                    <li><a href="product.html">SHOP</a></li>
                     <li><a href="#about">ABOUT</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                 </ul>
             </nav>
-            <div class="top-center-brand">
-                <h2 class="subtitle-top">CLOTHING STORE</h2>
-                <p class="tagline">Highest quality</p>
+
+            <!-- CENTER LOGO -->
+            <div class="top-center-logo">
+                <img src="logo/logo2..png" alt="ICLOTH Logo" class="brand-logo">
             </div>
+
             <div class="placeholder-right"></div>
         </header>
 
@@ -34,7 +38,94 @@
             <h1 onclick="window.location.href='product.html'" style="cursor: pointer;">ICLOTH</h1>
             <a href="product.html" class="shop-now-btn">SHOP NOW</a>
         </main>
+
+        <!-- FOOTER BUTTONS -->
+        <footer class="site-footer">
+            <!-- PWA Install Button -->
+            <button id="pwaInstallBtn" class="footer-btn pwa-btn" style="display:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v13M7 10l5 5 5-5"/>
+                    <path d="M3 18h18v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" fill="currentColor" stroke="none" opacity="0.3"/>
+                    <rect x="3" y="17" width="18" height="4" rx="1"/>
+                </svg>
+                تحميل التطبيق
+            </button>
+
+            <!-- Admin Button -->
+            <a href="admin-login.html" class="footer-btn admin-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M6 20v-2a6 6 0 0112 0v2"/>
+                    <path d="M19 11l2 2-4 4-2-2"/>
+                </svg>
+                Admin
+            </a>
+        </footer>
     </div>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwaPrompt" class="pwa-prompt" style="display:none;">
+        <div class="pwa-prompt-content">
+            <img src="logo/logo2..png" alt="ICLOTH" class="pwa-icon">
+            <div class="pwa-text">
+                <h3>تحميل تطبيق ICLOTH</h3>
+                <p>أضف التطبيق لشاشتك الرئيسية للوصول السريع</p>
+            </div>
+            <div class="pwa-actions">
+                <button id="pwaInstallConfirm" class="pwa-install-btn">تحميل</button>
+                <button id="pwaDismiss" class="pwa-dismiss-btn">لا شكراً</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW error:', err));
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const installBtn = document.getElementById('pwaInstallBtn');
+        const pwaPrompt = document.getElementById('pwaPrompt');
+        const installConfirm = document.getElementById('pwaInstallConfirm');
+        const dismissBtn = document.getElementById('pwaDismiss');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'flex';
+        });
+
+        installBtn.addEventListener('click', () => {
+            pwaPrompt.style.display = 'flex';
+        });
+
+        installConfirm.addEventListener('click', async () => {
+            pwaPrompt.style.display = 'none';
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+            }
+        });
+
+        dismissBtn.addEventListener('click', () => {
+            pwaPrompt.style.display = 'none';
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            deferredPrompt = null;
+        });
+    </script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
 
 // Single source of truth for admin email
-const ADMIN_EMAIL = 'm13@gmail.com';
+const ADMIN_EMAIL = 'jooo71477@gmail.com';
 
 // If already logged in as admin, skip the login page
 onAuthStateChanged(auth, (user) => {
@@ -24,7 +24,7 @@ loginForm.addEventListener('submit', async (e) => {
     const password = passwordInput.value;
 
     // Restrict to admin email only
-    if (email !== ADMIN_EMAIL) {
+    if (email !== ADMIN_EMAIL.toLowerCase()) {
         showError('Access denied. Admin privileges required.');
         return;
     }
