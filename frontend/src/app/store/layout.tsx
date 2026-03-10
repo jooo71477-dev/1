@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Navbar } from "@/components/store/Navbar";
 import { CartDrawer } from "@/components/store/CartDrawer";
+import { Chatbot } from "@/components/store/Chatbot";
 import { CartProvider } from "./cart-context";
 
 export default function StoreLayout({ children }: { children: ReactNode }) {
@@ -25,6 +26,7 @@ export default function StoreLayout({ children }: { children: ReactNode }) {
           </div>
         </footer>
         <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+        <Chatbot />
       </div>
     </CartProvider>
   );

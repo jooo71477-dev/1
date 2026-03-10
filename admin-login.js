@@ -13,13 +13,14 @@ onAuthStateChanged(auth, (user) => {
 const loginForm = document.getElementById('adminLoginForm');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
+const loginBtn = document.getElementById('loginBtn');
 const btnText = document.getElementById('btnText');
 const loader = document.getElementById('loader');
 const errorMsg = document.getElementById('errorMsg');
 
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = emailInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
     const password = passwordInput.value;
 
     // Restrict to admin email only
@@ -47,9 +48,20 @@ loginForm.addEventListener('submit', async (e) => {
 function setLoading(state) {
     btnText.style.display = state ? 'none' : 'inline';
     loader.style.display = state ? 'block' : 'none';
+    loginBtn.disabled = state;
+    loginBtn.style.opacity = state ? '0.7' : '1';
 }
 
 function showError(msg) {
     errorMsg.textContent = msg;
     errorMsg.style.display = 'block';
 }
+
+// Clear error message when user starts typing again
+[emailInput, passwordInput].forEach((input) => {
+    input.addEventListener('input', () => {
+        if (errorMsg.style.display === 'block') {
+            errorMsg.style.display = 'none';
+        }
+    });
+});

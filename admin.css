@@ -26,7 +26,7 @@ body {
 
 .admin-wrapper {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Sidebar Styling */
@@ -463,4 +463,76 @@ input:checked+.slider:before {
     padding: 25px;
     border-radius: 20px;
     min-height: 350px;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+    .search-box {
+        width: 260px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+    }
+
+    .admin-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+        overflow-x: auto;
+    }
+
+    .sidebar-header {
+        margin-right: 16px;
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .sidebar-nav li {
+        white-space: nowrap;
+        padding: 10px 14px;
+        margin-bottom: 0;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .top-bar {
+        padding: 14px 16px;
+        gap: 12px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .view-content {
+        padding: 20px 16px 32px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
