@@ -1,143 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICLOTH - Admin Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICLOTH — Admin</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(194,33,58,0.12), transparent),
+        var(--bg);
+    }
 
-        body {
-            background: #042a25;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+    .login-wrap {
+      width: 100%;
+      max-width: 400px;
+    }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
+    .login-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .login-back:hover { color: white; }
 
-        .login-card h2 {
-            margin-bottom: 25px;
-            font-weight: 600;
-            color: #80d611;
-            font-size: 1.5rem;
-        }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .login-logo img { height: 48px; width: auto; object-fit: contain; margin: 0 auto 16px; }
+    .login-logo h2 { font-size: 1rem; font-weight: 600; color: white; }
+    .login-logo p { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
 
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            opacity: 0.7;
-            margin-bottom: 8px;
-        }
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: white;
-            outline: none;
-            transition: 0.3s;
-        }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 7px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .form-group .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .form-group .input-wrap i {
+      position: absolute;
+      inset-inline-start: 14px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+    .form-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: white;
+      padding: 12px 14px 12px 40px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    [dir="ltr"] .form-group input { padding: 12px 40px 12px 14px; }
+    [dir="rtl"] .form-group input { padding: 12px 14px 12px 40px; }
+    [dir="ltr"] .form-group .input-wrap i { right: 14px; left: auto; }
 
-        .form-group input:focus {
-            border-color: #80d611;
-        }
+    .form-group input:focus {
+      border-color: var(--border2);
+      background: rgba(255,255,255,0.07);
+    }
+    .form-group input::placeholder { color: var(--muted); font-size: 0.83rem; }
 
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            background: #80d611;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            color: black;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--red);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-family: var(--font-body);
+    }
+    .submit-btn:hover:not(:disabled) { background: #d9273f; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(194,33,58,0.3); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .login-btn:hover {
-            background: #6bbb0e;
-        }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-        .error-msg {
-            color: #c2213a;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            display: none;
-        }
+    .error-box {
+      display: none;
+      background: var(--red-dim);
+      border: 1px solid var(--red-border);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      font-size: 0.82rem;
+      color: #ff8fa3;
+      margin-top: 14px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .error-box.show { display: flex; }
 
-        .loader {
-            display: none;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid #000;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    .lang-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-
 <body>
 
+  <div class="login-wrap">
+    <a href="index.html" class="login-back">
+      <i class="fa-solid fa-arrow-right"></i>
+      <span id="backTxt">العودة للموقع</span>
+    </a>
+
     <div class="login-card">
-        <h2>ICLOTH Admin Hub</h2>
-        <form id="adminLoginForm">
-            <div class="form-group">
-                <label>Admin Email</label>
-                <input type="email" id="email" required placeholder="m13@gmail.com" autocomplete="username">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
-            </div>
-            <button type="submit" class="login-btn" id="loginBtn">
-                <span id="btnText">Sign In Securely</span>
-                <div class="loader" id="loader"></div>
-            </button>
-            <div class="error-msg" id="errorMsg">Incorrect email or password.</div>
-        </form>
+      <div class="login-logo">
+        <img src="logo/logo2..png" alt="ICLOTH">
+        <h2 id="loginTitle">لوحة الإدارة</h2>
+        <p id="loginSub">سجّل دخولك للمتابعة</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label id="emailLabel">البريد الإلكتروني</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="email" required placeholder="admin@example.com" autocomplete="username">
+          </div>
+        </div>
+        <div class="form-group">
+          <label id="pwLabel">كلمة المرور</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="loginBtn">
+          <span id="btnText">تسجيل الدخول</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+
+        <div class="error-box" id="errorBox">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="errorMsg"></span>
+        </div>
+      </form>
+
+      <div class="lang-row">
+        <div class="lang-toggle">
+          <button data-lang="ar" class="active" onclick="setLang('ar')">ع</button>
+          <button data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script type="module" src="admin-login.js"></script>
+  <script type="module">
+    import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
+
+    const ADMIN_EMAIL = 'jooo71477@gmail.com';
+
+    onAuthStateChanged(auth, user => {
+      if (user && user.email === ADMIN_EMAIL) window.location.replace('admin.html');
+    });
+
+    const form = document.getElementById('adminLoginForm');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorBox = document.getElementById('errorBox');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const pass  = document.getElementById('password').value;
+
+      if (email !== ADMIN_EMAIL) {
+        showError(document.documentElement.lang === 'ar'
+          ? 'هذا البريد غير مصرح بالدخول' : 'Access denied for this email');
+        return;
+      }
+
+      setLoading(true);
+      try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        window.location.replace('admin.html');
+      } catch (err) {
+        const isAr = document.documentElement.lang === 'ar';
+        showError(
+          ['auth/wrong-password','auth/user-not-found','auth/invalid-credential'].includes(err.code)
+            ? (isAr ? 'بريد أو كلمة مرور خاطئة' : 'Invalid email or password')
+            : (isAr ? 'حدث خطأ، حاول مرة أخرى' : 'An error occurred, try again')
+        );
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    function setLoading(v) {
+      btnText.style.display = v ? 'none' : 'inline';
+      spinner.style.display = v ? 'block' : 'none';
+      loginBtn.disabled = v;
+    }
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorBox.classList.add('show');
+    }
+
+    [document.getElementById('email'), document.getElementById('password')].forEach(inp => {
+      inp.addEventListener('input', () => errorBox.classList.remove('show'));
+    });
+  </script>
+
+  <script>
+    const texts = {
+      ar: { back:'العودة للموقع', title:'لوحة الإدارة', sub:'سجّل دخولك للمتابعة', email:'البريد الإلكتروني', pw:'كلمة المرور', btn:'تسجيل الدخول' },
+      en: { back:'Back to store', title:'Admin Panel', sub:'Sign in to continue', email:'Email address', pw:'Password', btn:'Sign In' }
+    };
+
+    function setLang(lang) {
+      const t = texts[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir  = lang === 'ar' ? 'rtl' : 'ltr';
+      localStorage.setItem('icloth_lang', lang);
+      document.getElementById('backTxt').textContent   = t.back;
+      document.getElementById('loginTitle').textContent = t.title;
+      document.getElementById('loginSub').textContent  = t.sub;
+      document.getElementById('emailLabel').textContent = t.email;
+      document.getElementById('pwLabel').textContent   = t.pw;
+      document.getElementById('btnText').textContent   = t.btn;
+      document.querySelectorAll('.lang-toggle button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+    }
+
+    // Apply saved lang
+    const saved = localStorage.getItem('icloth_lang') || 'ar';
+    setLang(saved);
+  </script>
+
 </body>
-
 </html>

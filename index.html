@@ -1,131 +1,460 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICLOTH | Premium Clothing Store</title>
-    <meta name="description" content="ICLOTH - Premium clothing store in Kafr Shukr. Discover the latest fashion trends.">
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="logo/logo2..png">
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICLOTH | متجر الملابس الراقية</title>
+  <meta name="description" content="ICLOTH — متجر ملابس راقية في كفر شكر. أحدث الأزياء بأفضل جودة.">
+  <meta name="theme-color" content="#080808">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="logo/logo2..png">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ── HOME PAGE SPECIFIC ── */
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Animated bg gradient */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 110%, rgba(194,33,58,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 60%, rgba(194,33,58,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 90% 60%, rgba(194,33,58,0.07) 0%, transparent 50%);
+      animation: heroGlow 10s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes heroGlow {
+      from { opacity: 0.7; transform: scale(1); }
+      to   { opacity: 1;   transform: scale(1.05); }
+    }
+
+    /* Noise texture overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 80px 40px 40px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(194,33,58,0.12);
+      border: 1px solid var(--red-border);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s var(--ease) both;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: var(--font-brand);
+      font-size: clamp(5rem, 18vw, 16rem);
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -4px;
+      margin-bottom: 32px;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255,255,255,0.45) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeIn 1s var(--ease) 0.2s both;
+      cursor: pointer;
+    }
+
+    .hero-sub {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 48px;
+      animation: fadeIn 1s var(--ease) 0.4s both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeIn 1s var(--ease) 0.6s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scrolling marquee */
+    .marquee-wrap {
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      padding: 12px 0;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 20s linear infinite;
+      gap: 0;
+    }
+
+    [dir="rtl"] .marquee-track { animation-direction: reverse; }
+
+    .marquee-track span {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 32px;
+    }
+
+    .marquee-track span.dot {
+      color: var(--red);
+      padding: 0;
+      font-size: 0.5rem;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* FEATURES SECTION */
+    .features {
+      padding: 80px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .feature-card:hover {
+      border-color: var(--red-border);
+      background: rgba(194,33,58,0.05);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--red-dim);
+      border: 1px solid var(--red-border);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* CATEGORIES SECTION */
+    .categories-section {
+      padding: 0 48px 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .cats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      display: block;
+    }
+
+    .cat-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+    }
+
+    .cat-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .cat-card h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .cat-card p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .cats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features, .categories-section { padding-inline: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { letter-spacing: -2px; }
+      .cats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="hero hero-no-bg">
-        <header>
-            <nav class="top-left-nav">
-                <ul>
-                    <li><a href="product.html">SHOP</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </nav>
 
-            <!-- CENTER LOGO -->
-            <div class="top-center-logo">
-                <img src="logo/logo2..png" alt="ICLOTH Logo" class="brand-logo">
-            </div>
+  <!-- HEADER (injected by JS) -->
+  <div id="header-mount"></div>
 
-            <div class="placeholder-right"></div>
-        </header>
+  <!-- ████ HERO ████ -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-eyebrow" data-i18n="tagline">متجر الملابس الراقية</span>
 
-        <main class="bottom-brand">
-            <h1 onclick="window.location.href='shop.html'" style="cursor: pointer;">ICLOTH</h1>
-            <a href="shop.html" class="shop-now-btn">SHOP NOW</a>
-        </main>
+      <h1 class="hero-title" onclick="window.location.href='shop.html'">ICLOTH</h1>
 
-        <!-- FOOTER BUTTONS -->
-        <footer class="site-footer">
-            <!-- PWA Install Button -->
-            <button id="pwaInstallBtn" class="footer-btn pwa-btn" style="display:none;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2v13M7 10l5 5 5-5"/>
-                    <path d="M3 18h18v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" fill="currentColor" stroke="none" opacity="0.3"/>
-                    <rect x="3" y="17" width="18" height="4" rx="1"/>
-                </svg>
-                تحميل التطبيق
-            </button>
+      <p class="hero-sub" data-i18n="sub_tagline">جودة تشعر بها</p>
 
-            <!-- Admin Button -->
-            <a href="admin-login.html" class="footer-btn admin-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="8" r="4"/>
-                    <path d="M6 20v-2a6 6 0 0112 0v2"/>
-                    <path d="M19 11l2 2-4 4-2-2"/>
-                </svg>
-                Admin
-            </a>
-        </footer>
+      <div class="hero-cta">
+        <a href="shop.html" class="btn btn-primary">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span data-i18n="shop_btn">تسوق الآن</span>
+        </a>
+        <a href="#features" class="btn btn-outline">
+          <span data-i18n="nav_about">من نحن</span>
+        </a>
+      </div>
     </div>
 
-    <!-- PWA Install Prompt -->
-    <div id="pwaPrompt" class="pwa-prompt" style="display:none;">
-        <div class="pwa-prompt-content">
-            <img src="logo/logo2..png" alt="ICLOTH" class="pwa-icon">
-            <div class="pwa-text">
-                <h3>تحميل تطبيق ICLOTH</h3>
-                <p>أضف التطبيق لشاشتك الرئيسية للوصول السريع</p>
-            </div>
-            <div class="pwa-actions">
-                <button id="pwaInstallConfirm" class="pwa-install-btn">تحميل</button>
-                <button id="pwaDismiss" class="pwa-dismiss-btn">لا شكراً</button>
-            </div>
+    <!-- Marquee -->
+    <div class="marquee-wrap">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+  </section>
+
+  <!-- ████ FEATURES ████ -->
+  <section id="features">
+    <div class="features">
+      <div style="text-align:center; margin-bottom:48px;">
+        <span class="section-label">WHY ICLOTH</span>
+        <h2 class="section-title" id="featuresTitle">لماذا تختارنا؟</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <h3 id="feat1Title">شحن سريع</h3>
+          <p id="feat1Sub">توصيل لجميع محافظات مصر خلال 24-72 ساعة بأفضل الأسعار.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 id="feat2Title">جودة مضمونة</h3>
+          <p id="feat2Sub">كل منتج يمر بفحص جودة دقيق قبل الشحن لضمان رضاك التام.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
+          <h3 id="feat3Title">إرجاع مجاني</h3>
+          <p id="feat3Sub">غير راضٍ؟ أرجع المنتج خلال 14 يوم بدون أي رسوم إضافية.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW registered:', reg.scope))
-                    .catch(err => console.log('SW error:', err));
-            });
-        }
+  <!-- ████ CATEGORIES ████ -->
+  <section>
+    <div class="categories-section">
+      <div class="section-header">
+        <div>
+          <span class="section-label">CATEGORIES</span>
+          <h2 class="section-title" id="catsTitle">تسوق حسب الفئة</h2>
+        </div>
+        <a href="shop.html" class="btn btn-ghost" id="viewAllBtn">
+          <span data-i18n="nav_shop">المتجر</span>
+          <i class="fa-solid fa-arrow-left" id="viewAllArrow"></i>
+        </a>
+      </div>
+      <div class="cats-grid">
+        <a href="shop.html?cat=jackets" class="cat-card">
+          <span class="cat-icon">🧥</span>
+          <h4 id="cat1">جاكيتات</h4>
+          <p id="cat1sub">مجموعة شتوية</p>
+        </a>
+        <a href="shop.html?cat=tshirts" class="cat-card">
+          <span class="cat-icon">👕</span>
+          <h4 id="cat2">تيشرتات</h4>
+          <p id="cat2sub">راحة وستايل</p>
+        </a>
+        <a href="shop.html?cat=hoodies" class="cat-card">
+          <span class="cat-icon">🤍</span>
+          <h4 id="cat3">هوديز</h4>
+          <p id="cat3sub">دافئة وأنيقة</p>
+        </a>
+        <a href="shop.html?cat=pants" class="cat-card">
+          <span class="cat-icon">👖</span>
+          <h4 id="cat4">بناطيل</h4>
+          <p id="cat4sub">كلاسيك ومريح</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        // PWA Install Prompt
-        let deferredPrompt;
-        const installBtn = document.getElementById('pwaInstallBtn');
-        const pwaPrompt = document.getElementById('pwaPrompt');
-        const installConfirm = document.getElementById('pwaInstallConfirm');
-        const dismissBtn = document.getElementById('pwaDismiss');
+  <!-- FOOTER (injected by JS) -->
+  <div id="footer-mount"></div>
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'flex';
+  <script type="module">
+    import { initLang, initPWA, buildHeader, buildFooter, TRANSLATIONS, currentLang } from './i18n.js';
+
+    // Inject header & footer
+    document.getElementById('header-mount').innerHTML = buildHeader('home');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+
+    // Init language & PWA
+    initLang();
+    initPWA();
+
+    // Build marquee
+    function buildMarquee(t) {
+      const items = [
+        t.nav_home, '·', t.nav_shop, '·', 'ICLOTH', '·', t.sub_tagline, '·', 'KAFR SHUKR', '·',
+        t.nav_home, '·', t.nav_shop, '·', 'ICLOTH', '·', t.sub_tagline, '·', 'KAFR SHUKR', '·',
+      ];
+      document.getElementById('marqueeTrack').innerHTML =
+        items.map(i => `<span${i === '·' ? ' class="dot"' : ''}>${i}</span>`).join('');
+    }
+
+    // Dynamic translations for non-data-i18n elements
+    function updatePageText(lang) {
+      const t = TRANSLATIONS[lang];
+      const isAr = lang === 'ar';
+
+      document.getElementById('featuresTitle').textContent = isAr ? 'لماذا تختارنا؟' : 'Why Choose Us?';
+      document.getElementById('feat1Title').textContent = isAr ? 'شحن سريع' : 'Fast Shipping';
+      document.getElementById('feat1Sub').textContent = isAr ? 'توصيل لجميع محافظات مصر خلال 24-72 ساعة بأفضل الأسعار.' : 'Delivery across Egypt within 24-72 hours at the best rates.';
+      document.getElementById('feat2Title').textContent = isAr ? 'جودة مضمونة' : 'Guaranteed Quality';
+      document.getElementById('feat2Sub').textContent = isAr ? 'كل منتج يمر بفحص جودة دقيق قبل الشحن.' : 'Every product passes quality inspection before shipping.';
+      document.getElementById('feat3Title').textContent = isAr ? 'إرجاع مجاني' : 'Free Returns';
+      document.getElementById('feat3Sub').textContent = isAr ? 'إرجع المنتج خلال 14 يوم بدون رسوم.' : 'Return within 14 days, no questions asked.';
+      document.getElementById('catsTitle').textContent = isAr ? 'تسوق حسب الفئة' : 'Shop by Category';
+      document.getElementById('cat1').textContent = isAr ? 'جاكيتات' : 'Jackets';
+      document.getElementById('cat1sub').textContent = isAr ? 'مجموعة شتوية' : 'Winter Collection';
+      document.getElementById('cat2').textContent = isAr ? 'تيشرتات' : 'T-Shirts';
+      document.getElementById('cat2sub').textContent = isAr ? 'راحة وستايل' : 'Comfort & Style';
+      document.getElementById('cat3').textContent = isAr ? 'هوديز' : 'Hoodies';
+      document.getElementById('cat3sub').textContent = isAr ? 'دافئة وأنيقة' : 'Warm & Stylish';
+      document.getElementById('cat4').textContent = isAr ? 'بناطيل' : 'Pants';
+      document.getElementById('cat4sub').textContent = isAr ? 'كلاسيك ومريح' : 'Classic & Comfy';
+      document.getElementById('viewAllArrow').className = isAr ? 'fa-solid fa-arrow-left' : 'fa-solid fa-arrow-right';
+
+      buildMarquee(t);
+    }
+
+    // Initial render + listen for lang changes
+    const savedLang = localStorage.getItem('icloth_lang') || 'ar';
+    updatePageText(savedLang);
+
+    document.addEventListener('langchange', (e) => {
+      updatePageText(e.detail.lang);
+      // Re-inject header & footer with new lang
+      document.getElementById('header-mount').innerHTML = buildHeader('home');
+      document.getElementById('footer-mount').innerHTML = buildFooter();
+      // Re-attach lang toggle listeners after re-inject
+      document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          import('./i18n.js').then(m => m.applyLang(btn.dataset.lang));
         });
+      });
+      initPWA();
+    });
+  </script>
 
-        installBtn.addEventListener('click', () => {
-            pwaPrompt.style.display = 'flex';
-        });
-
-        installConfirm.addEventListener('click', async () => {
-            pwaPrompt.style.display = 'none';
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                if (outcome === 'accepted') {
-                    installBtn.style.display = 'none';
-                }
-            }
-        });
-
-        dismissBtn.addEventListener('click', () => {
-            pwaPrompt.style.display = 'none';
-        });
-
-        window.addEventListener('appinstalled', () => {
-            installBtn.style.display = 'none';
-            deferredPrompt = null;
-        });
-    </script>
 </body>
-
 </html>
