@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICLOTH | لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4">
+                <i class="fa-solid fa-bolt text-warning fa-2x mb-2 pulse-primary" style="font-size: 2.5rem;"></i>
+                <h4 class="fw-bold tracking-wide m-0">EL FAGER</h4>
+                <small class="text-white-50">GAMING SYSTEM</small>
+            </div>
+            <div class="list-group list-group-flush my-3 px-3">
+                <a href="dashboard.html" class="list-group-item active"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <a href="products-enhanced.html" class="list-group-item"><i class="fa-solid fa-box-open"></i> المنتجات</a>
+                <a href="orders.html" class="list-group-item"><i class="fa-solid fa-cart-shopping"></i> الطلبات</a>
+                <a href="categories.html" class="list-group-item"><i class="fa-solid fa-tags"></i> الفئات</a>
+                <a href="customers.html" class="list-group-item"><i class="fa-solid fa-users"></i> العملاء</a>
+                
+                <div class="sidebar-divider my-2 opacity-25" style="border-top: 1px solid white;"></div>
+                
+                <a href="knowledge.html" class="list-group-item"><i class="fa-solid fa-book-open"></i> دليل الموظف</a>
+                <a href="operations.html" class="list-group-item"><i class="fa-solid fa-microchip"></i> مركز العمليات</a>
+                <a href="whatsapp-settings.html" class="list-group-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="subscription.html" class="list-group-item"><i class="fa-solid fa-crown text-warning"></i> الاشتراك</a>
+                <a href="theme-settings.html" class="list-group-item"><i class="fa-solid fa-palette"></i> المظهر</a>
+                
+                <a href="settings.html" class="list-group-item mt-auto"><i class="fa-solid fa-gear"></i> الإعدادات</a>
+                <a href="#" onclick="logout()" class="list-group-item text-danger"><i class="fa-solid fa-right-from-bracket"></i> خروج</a>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark glass-nav px-4 py-3">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-outline-light d-md-none me-3" id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="mb-0 text-white fw-bold">نظرة عامة على النظام</h5>
+                </div>
+                <div class="ms-auto user-profile d-flex align-items-center gap-3">
+                    <div class="text-end d-none d-sm-block">
+                        <div id="adminUserEmail" class="small fw-bold text-white">admin@icloth.com</div>
+                        <div class="x-small text-white-50">Admin Level 99</div>
+                    </div>
+                    <div class="avatar gaming-card rounded-circle border border-primary" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-user-ninja text-primary"></i>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <!-- Gaming Banner -->
+                <div class="glass-card gaming-card p-4 mb-4 pulse-primary">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 text-end text-md-start">
+                            <h4 class="fw-bold text-white mb-2"><i class="fa-solid fa-gamepad me-2 text-primary"></i> Gaming Soon Interface</h4>
+                            <p class="text-white-50 mb-0">نحن نعمل على تطوير ميزات جديدة كلياً. بعض الأقسام قد تكون غير مفعلة حالياً.</p>
+                        </div>
+                        <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
+                            <div class="badge bg-primary px-4 py-2" style="font-size: 0.9rem;">إصدار بيتا 2.0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="glass-card gaming-card p-4 text-center neon-border">
+                            <h3 id="totalSales" class="fw-bold text-success glow-text">0 EGP</h3>
+                            <p class="text-muted mb-0 small">إجمالي مبيعات اليوم</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="glass-card gaming-card p-4 text-center">
+                            <h3 id="totalOrders" class="fw-bold text-info">0</h3>
+                            <p class="text-muted mb-0 small">طلبات قيد المعالجة</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="glass-card gaming-card p-4 text-center">
+                            <h3 id="totalProducts" class="fw-bold text-warning">0</h3>
+                            <p class="text-muted mb-0 small">المنتجات النشطة</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="glass-card gaming-card p-4 text-center">
+                            <i class="fa-solid fa-lock text-white-50 mb-2"></i>
+                            <h3 class="fw-bold text-white-50">Locked</h3>
+                            <p class="text-muted mb-0 small">إحصائيات متقدمة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Recent Orders -->
+                    <div class="col-lg-8">
+                        <div class="glass-card gaming-card p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h6 class="text-white mb-0"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i> النشاط الأخير</h6>
+                                <a href="orders.html" class="btn btn-sm btn-outline-primary">المزيد</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>الطلب</th>
+                                            <th>العميل</th>
+                                            <th>الحالة</th>
+                                            <th>المبلغ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentOrdersTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coming Soon Card -->
+                    <div class="col-lg-4">
+                        <div class="glass-card coming-soon-overlay h-100 d-flex flex-column align-items-center justify-content-center p-5 text-center">
+                            <i class="fa-solid fa-chart-pie fa-3x text-white-50 mb-3"></i>
+                            <h5 class="text-white-50">أدوات تحليل البيانات</h5>
+                            <p class="small text-muted">قريباً: رسوم بيانية تفاعلية وتوقعات المبيعات بالذكاء الاصطناعي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="main.js"></script>
+    <script>
+        document.getElementById('menu-toggle')?.addEventListener('click', function() {
+            document.getElementById('wrapper').classList.toggle('toggled');
+        });
+    </script>
+</body>
+</html>

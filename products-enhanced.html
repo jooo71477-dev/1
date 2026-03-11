@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>المنتجات | ICLOTH</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4">
+                <i class="fa-solid fa-bolt text-warning fa-2x mb-2 pulse-primary" style="font-size: 2.5rem;"></i>
+                <h4 class="fw-bold tracking-wide m-0">EL FAGER</h4>
+                <small class="text-white-50">GAMING SYSTEM</small>
+            </div>
+            <div class="list-group list-group-flush my-3 px-3">
+                <a href="dashboard.html" class="list-group-item"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <a href="products-enhanced.html" class="list-group-item active"><i class="fa-solid fa-box-open"></i> المنتجات</a>
+                <a href="orders.html" class="list-group-item"><i class="fa-solid fa-cart-shopping"></i> الطلبات</a>
+                <a href="categories.html" class="list-group-item"><i class="fa-solid fa-tags"></i> الفئات</a>
+                <a href="customers.html" class="list-group-item"><i class="fa-solid fa-users"></i> العملاء</a>
+                
+                <div class="sidebar-divider my-2 opacity-25" style="border-top: 1px solid white;"></div>
+                
+                <a href="knowledge.html" class="list-group-item"><i class="fa-solid fa-book-open"></i> دليل الموظف</a>
+                <a href="operations.html" class="list-group-item"><i class="fa-solid fa-microchip"></i> مركز العمليات</a>
+                <a href="whatsapp-settings.html" class="list-group-item"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="subscription.html" class="list-group-item"><i class="fa-solid fa-crown text-warning"></i> الاشتراك</a>
+                <a href="theme-settings.html" class="list-group-item"><i class="fa-solid fa-palette"></i> المظهر</a>
+                
+                <a href="settings.html" class="list-group-item mt-auto"><i class="fa-solid fa-gear"></i> الإعدادات</a>
+                <a href="#" onclick="logout()" class="list-group-item text-danger"><i class="fa-solid fa-right-from-bracket"></i> خروج</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark glass-nav px-4 py-3">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-sm btn-outline-light d-md-none me-3" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="mb-0 text-white fw-bold">نظام إدارة المنتجات</h5>
+                </div>
+                <div class="ms-auto d-flex gap-2">
+                    <button class="btn btn-outline-primary" disabled><i class="fa-solid fa-rotate me-1"></i>تحديث</button>
+                    <button class="btn btn-primary" disabled><i class="fa-solid fa-plus me-1"></i>منتج جديد</button>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <div class="glass-card gaming-card p-5 text-center coming-soon-overlay">
+                    <div class="coming-soon-wrapper">
+                        <i class="fa-solid fa-parachute-box coming-soon-icon"></i>
+                        <h2 class="fw-bold text-white mb-3">Inventory System Loading...</h2>
+                        <p class="text-white-50 mb-4 mx-auto" style="max-width: 500px;">
+                            نحن نقوم ببناء نظام إدارة مخزون متطور يتناسب مع قوة "EL FAGER". قريباً ستتمكن من إدارة منتجاتك بذكاء.
+                        </p>
+                        <div class="progress bg-dark mb-4 mx-auto" style="height: 10px; width: 300px; border-radius: 10px;">
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 65%;"></div>
+                        </div>
+                        <button class="btn btn-outline-primary" disabled>تفعيل النظام قريباً</button>
+                    </div>
+                </div>
+                
+                <div class="mt-4 locked-feature">
+                    <!-- Placeholder table to show what it will look like -->
+                    <div class="table-responsive">
+                         <table class="table table-dark table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>صورة</th>
+                                    <th>الاسم</th>
+                                    <th>الفئة</th>
+                                    <th>السعر</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div class="bg-secondary rounded" style="width:40px; height:40px;"></div></td>
+                                    <td>Sample Gaming Chair</td>
+                                    <td>Accessories</td>
+                                    <td>2,500 EGP</td>
+                                    <td><span class="badge bg-secondary">Locked</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Placeholder -->
+    <div class="modal fade" id="addProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content glass-card">
+                <div class="modal-header border-0"><h5 class="modal-title">إضافة منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <p class="text-center py-4">نموذج إضافة المنتج متاح في النسخة المطورة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="products-enhanced.js"></script>
+</body>
+</html>

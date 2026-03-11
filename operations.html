@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز العمليات | ICLOTH</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="logo/logo2..png" alt="ICLOTH" style="height: 45px;">
+                <h5 class="fw-bold mt-2 text-white">ICLOTH Ops</h5>
+            </div>
+            <div class="list-group list-group-flush my-3 px-3">
+                <a href="dashboard.html" class="list-group-item"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <a href="products-enhanced.html" class="list-group-item"><i class="fa-solid fa-box"></i> المنتجات</a>
+                <a href="orders.html" class="list-group-item"><i class="fa-solid fa-cart-shopping"></i> الطلبات</a>
+                <a href="knowledge.html" class="list-group-item"><i class="fa-solid fa-book-open"></i> دليل الموظف</a>
+                <a href="operations.html" class="list-group-item active"><i class="fa-solid fa-microchip"></i> مركز العمليات</a>
+                <a href="customers.html" class="list-group-item"><i class="fa-solid fa-users"></i> العملاء</a>
+                <a href="reports.html" class="list-group-item"><i class="fa-solid fa-chart-line"></i> التقارير</a>
+                <a href="settings.html" class="list-group-item mt-auto"><i class="fa-solid fa-gear"></i> الإعدادات</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark glass-nav px-4 py-3">
+                <h5 class="mb-0 text-white fw-bold">مركز العمليات (Operations Center)</h5>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <div class="row g-4">
+                    <!-- Maintenance Mode -->
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 h-100">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-screwdriver-wrench text-warning me-2"></i> وضع الصيانة</h5>
+                            <p class="text-white-50 small mb-4">تفعيل هذا الوضع سيمنع العملاء من تصفح المتجر وإتمام الطلبات مؤقتاً.</p>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="maintenanceSwitch">
+                                <label class="form-check-label text-white" for="maintenanceSwitch">تفعيل وضع الصيانة</label>
+                            </div>
+
+                            <div id="maintenanceDetails" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label small">رسالة الصيانة</label>
+                                    <textarea id="maintenanceMsg" class="form-control form-control-sm" rows="2">نحن نقوم ببعض التحسينات، سنعود قريباً!</textarea>
+                                </div>
+                                <button id="btnSaveMaintenance" class="btn btn-sm btn-warning w-100 fw-bold">حفظ الإعدادات</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Health -->
+                    <div class="col-md-8">
+                        <div class="glass-card p-4 h-100">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-heart-pulse text-danger me-2"></i> صحة النظام (Health Check)</h5>
+                            <div class="row g-3" id="healthStats">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-dark bg-opacity-50 rounded-3 text-center border border-success">
+                                        <div class="text-white-50 small mb-1">قاعدة البيانات</div>
+                                        <div class="text-success fw-bold">متصل <i class="fa-solid fa-circle-check"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-dark bg-opacity-50 rounded-3 text-center border border-success">
+                                        <div class="text-white-50 small mb-1">مركز التخزين</div>
+                                        <div class="text-success fw-bold">يعمل <i class="fa-solid fa-circle-check"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-dark bg-opacity-50 rounded-3 text-center border border-success">
+                                        <div class="text-white-50 small mb-1">سرعة الاستجابة</div>
+                                        <div class="text-success fw-bold">ممتاز (28ms)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="border-secondary my-4">
+
+                            <h6 class="fw-bold text-white mb-3">تسجيل عطل (Incident Report)</h6>
+                            <form id="incidentForm" class="row g-2">
+                                <div class="col-md-6">
+                                    <input type="text" id="incidentTitle" class="form-control" placeholder="عنوان العطل..." required>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="incidentSeverity" class="form-select">
+                                        <option value="low">منخفض</option>
+                                        <option value="medium">متوسط</option>
+                                        <option value="high">حرج</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-danger w-100">بلاغ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Incidents List -->
+                    <div class="col-12">
+                        <div class="glass-card p-4">
+                            <h5 class="fw-bold mb-4"><i class="fa-solid fa-list-check text-info me-2"></i> الأعطال المسجلة</h5>
+                            <div class="table-responsive">
+                                <table class="table table-dark align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>التاريخ</th>
+                                            <th>العطل</th>
+                                            <th>الخطورة</th>
+                                            <th>الحالة</th>
+                                            <th>الإجراء</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="incidentsTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Decision Logs -->
+                    <div class="col-12 mt-4">
+                        <div class="glass-card p-4">
+                            <h5 class="fw-bold mb-4"><i class="fa-solid fa-gavel text-primary me-2"></i> سجل القرارات الإدارية</h5>
+                            <form id="decisionForm" class="row g-2 mb-4">
+                                <div class="col-md-10">
+                                    <input type="text" id="decisionText" class="form-control" placeholder="لماذا اتخذنا هذا القرار؟..." required>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary w-100">تسجيل</button>
+                                </div>
+                            </form>
+                            <div id="decisionHistory" class="small text-white-50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="js/operations.js"></script>
+</body>
+</html>

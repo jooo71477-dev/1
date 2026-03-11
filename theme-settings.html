@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات المظهر | ICLOTH</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="logo/logo2..png" alt="ICLOTH" style="height: 45px;">
+                <h5 class="fw-bold mt-2 text-white">ICLOTH Theme</h5>
+            </div>
+            <div class="list-group list-group-flush my-3 px-3">
+                <a href="dashboard.html" class="list-group-item"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <a href="settings.html" class="list-group-item"><i class="fa-solid fa-gear"></i> الإعدادات</a>
+                <a href="theme-settings.html" class="list-group-item active"><i class="fa-solid fa-palette"></i> المظهر</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark glass-nav px-4 py-3">
+                <h5 class="mb-0 text-white fw-bold"><i class="fa-solid fa-palette me-2 text-primary"></i> إعدادات المظهر والسمات</h5>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <div class="glass-card p-4 mb-4">
+                    <h5 class="text-white mb-4"><i class="fa-solid fa-swatchbook me-2"></i> السمات الجاهزة</h5>
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="card bg-dark bg-opacity-50 border-primary" onclick="applyTheme('modern')" style="cursor: pointer; border-radius: 12px;">
+                                <div class="card-body text-center">
+                                    <div style="background: linear-gradient(135deg, #c2213a, #10b981); height: 80px; border-radius: 8px;" class="mb-3"></div>
+                                    <h6>Modern ICLOTH</h6>
+                                    <p class="text-muted small">أحمر عصري</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-dark bg-opacity-50 border-warning" onclick="applyTheme('classic')" style="cursor: pointer; border-radius: 12px;">
+                                <div class="card-body text-center">
+                                    <div style="background: linear-gradient(135deg, #1f2937, #f59e0b); height: 80px; border-radius: 8px;" class="mb-3"></div>
+                                    <h6>Classic Gold</h6>
+                                    <p class="text-muted small">كلاسيكي فخم</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4">
+                    <h5 class="text-white mb-4"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> منشئ السمات المخصص</h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">اللون الأساسي</label>
+                            <div class="input-group mb-3">
+                                <input type="color" class="form-control form-control-color" id="primaryColor" value="#c2213a">
+                                <input type="text" class="form-control" id="primaryColorText" value="#c2213a">
+                            </div>
+                            <label class="form-label">نوع الخط</label>
+                            <select class="form-select mb-3" id="fontFamily">
+                                <option value="'Cairo', sans-serif">Cairo</option>
+                                <option value="'Tajawal', sans-serif">Tajawal</option>
+                                <option value="'Almarai', sans-serif">Almarai</option>
+                                <option value="'Inter', sans-serif">Inter</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">نصف قطر الزوايا</label>
+                            <input type="range" class="form-range" id="borderRadius" min="0" max="30" value="12">
+                            <span id="borderRadiusValue" class="text-muted">12px</span>
+                        </div>
+                        <div class="col-12 text-end">
+                            <button class="btn btn-primary px-4" onclick="saveCustomTheme()">حفظ السمة وتطبيقها</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="js/theme-settings.js"></script>
+</body>
+</html>

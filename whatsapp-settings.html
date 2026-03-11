@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات WhatsApp | ICLOTH</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-sidebar" id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <img src="logo/logo2..png" alt="ICLOTH" style="height: 45px;">
+                <h5 class="fw-bold mt-2 text-white">ICLOTH WA</h5>
+            </div>
+            <div class="list-group list-group-flush my-3 px-3">
+                <a href="dashboard.html" class="list-group-item"><i class="fa-solid fa-house"></i> الرئيسية</a>
+                <a href="products-enhanced.html" class="list-group-item"><i class="fa-solid fa-box"></i> المنتجات</a>
+                <a href="orders.html" class="list-group-item"><i class="fa-solid fa-cart-shopping"></i> الطلبات</a>
+                <a href="whatsapp-settings.html" class="list-group-item active"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="settings.html" class="list-group-item mt-auto"><i class="fa-solid fa-gear"></i> الإعدادات</a>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark glass-nav px-4 py-3">
+                <h5 class="mb-0 text-white fw-bold"><i class="fa-brands fa-whatsapp text-success me-2"></i> إعدادات WhatsApp Business</h5>
+            </nav>
+
+            <div class="container-fluid px-4 py-4">
+                <div class="glass-card mb-4 p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="text-white mb-2"><i class="fa-solid fa-plug me-2"></i> حالة الاتصال</h5>
+                            <p class="text-muted mb-0">قم بربط حساب WhatsApp Business الخاص بك</p>
+                        </div>
+                        <div><span id="connectionStatus" class="badge bg-secondary">غير متصل</span></div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="glass-card p-4">
+                            <h6 class="text-primary mb-3"><i class="fa-solid fa-key me-2"></i> إعدادات API</h6>
+                            <form id="apiSettingsForm">
+                                <div class="mb-3">
+                                    <label class="form-label">رقم WhatsApp البزنس</label>
+                                    <input type="tel" class="form-control" id="whatsappNumber" placeholder="+201234567890">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">API Token</label>
+                                    <input type="password" class="form-control" id="apiToken" placeholder="أدخل التوكين الخاص بك">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">API Provider</label>
+                                    <select class="form-select" id="apiProvider">
+                                        <option value="">اختر المزود</option>
+                                        <option value="twilio">Twilio</option>
+                                        <option value="whatsapp-official">WhatsApp Business API</option>
+                                        <option value="custom">مخصص</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">حفظ الإعدادات</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="glass-card p-4">
+                            <h6 class="text-success mb-3"><i class="fa-solid fa-robot me-2"></i> الإرسال التلقائي</h6>
+                            <form id="autoSendSettings">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="autoOrderConfirmation" checked>
+                                    <label class="form-check-label">تأكيد الطلب تلقائياً</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="autoShippingUpdate" checked>
+                                    <label class="form-check-label">إشعار الشحن تلقائياً</label>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">حفظ التفضيلات</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates -->
+                <div class="glass-card p-4">
+                    <h5 class="text-white mb-4"><i class="fa-solid fa-message me-2"></i> قوالب الرسائل</h5>
+                    <div class="row g-3" id="templatesGrid">
+                        <div class="col-md-6">
+                            <div class="card bg-dark bg-opacity-50 border-secondary">
+                                <div class="card-header border-secondary text-white">تأكيد الطلب</div>
+                                <div class="card-body">
+                                    <textarea class="form-control bg-dark text-white border-secondary mb-3" rows="5">مرحباً {{customer_name}} 👋 تم استلام طلبك بنجاح! رقم الطلب: #{{order_id}}</textarea>
+                                    <button class="btn btn-sm btn-outline-info">حفظ القالب</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="js/whatsapp-settings.js"></script>
+</body>
+</html>
