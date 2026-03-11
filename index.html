@@ -3,148 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICLOTH | تسجيل الدخول</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <title>ICLOTH | متجر الملابس العصرية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
-    <style>
-        :root {
-            --bg: #050505;
-            --surface: #0d0d0d;
-            --primary: #c2213a;
-            --text: #ffffff;
-            --muted: #808080;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .login-card {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 24px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .form-control {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            border-radius: 12px;
-            padding: 12px 16px;
-        }
-        .form-control:focus {
-            background: rgba(255,255,255,0.05);
-            border-color: var(--primary);
-            box-shadow: none;
-            color: white;
-        }
-        .btn-primary {
-            background: var(--primary);
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            padding: 12px;
-            transition: all 0.3s;
-        }
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        .btn-google {
-            background: white;
-            color: black;
-            border-radius: 12px;
-            padding: 12px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            border: none;
-            margin-top: 15px;
-        }
-        .logo-box { text-align: center; margin-bottom: 30px; }
-        .logo-box img { height: 50px; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="store.css">
 </head>
 <body>
 
-    <div class="login-card">
-        <div class="logo-box">
-            <img src="logo/logo2..png" alt="ICLOTH">
-            <h4 class="mt-3 fw-black">لوحة التحكم</h4>
+    <header>
+        <div class="header-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="ماذا تبحث عن اليوم؟">
+            </div>
+            
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;"><h1>ICLOTH</h1></a>
+            </div>
+            
+            <div class="header-icons">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <a href="admin-login.html" style="color: inherit;"><i class="fa-solid fa-user"></i></a>
+            </div>
         </div>
+    </header>
 
-        <form id="loginForm">
-            <div class="mb-3">
-                <label class="form-label small text-muted">البريد الإلكتروني</label>
-                <input type="email" id="email" class="form-control" placeholder="admin@icloth.com" required>
+    <main>
+        <section class="hero">
+            <div class="hero-card">
+                <div class="hero-content">
+                    <h2>تشكيلة الشتاء<br> الجديدة 2026</h2>
+                    <p>اكتشف أحدث صيحات الموضة العالمية بجودة مصرية فاخرة. أناقة بلا حدود وتصاميم تواكب العصر.</p>
+                    <a href="#shop" class="cta-btn">تسوق الآن <i class="fa-solid fa-arrow-left ms-2"></i></a>
+                </div>
+                <!-- Optional: Use generate_image to create a background image if needed -->
+                <div class="hero-image">
+                    <i class="fa-solid fa-clothing-conditioner fa-10x" style="opacity: 0.1;"></i>
+                </div>
             </div>
-            <div class="mb-4">
-                <label class="form-label small text-muted">كلمة المرور</label>
-                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+        </section>
+
+        <section class="categories">
+            <h3 class="section-title">الأقسام الأعلى طلباً</h3>
+            <div class="category-row">
+                <div class="cat-item active">الكل</div>
+                <div class="cat-item">قمصان</div>
+                <div class="cat-item">تشيرتات</div>
+                <div class="cat-item">بناطيل</div>
+                <div class="cat-item">أحذية</div>
+                <div class="cat-item">ساعات</div>
+                <div class="cat-item">إكسسوارات</div>
             </div>
-            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
-        </form>
+        </section>
 
-        <div class="text-center my-4 text-muted small">أو</div>
+        <section class="ad-grid">
+            <div class="ad-box red">
+                <h3>خصم يصل إلى<br> 50%</h3>
+                <p>على جميع المجموعات المختارة</p>
+                <a href="#" class="text-white mt-3 fw-bold">تسوق العروض</a>
+            </div>
+            <div class="ad-box dark">
+                <h3>الأكثر<br> مبيعاً</h3>
+                <p>تعرف على ما يفضله عملاؤنا</p>
+                <a href="#" class="text-white mt-3 fw-bold">اكتشف الآن</a>
+            </div>
+        </section>
 
-        <button onclick="loginWithGoogle()" class="btn btn-google">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18">
-            الدخول عبر Google
-        </button>
-    </div>
+        <section id="shop" class="categories">
+            <h3 class="section-title">أحدث المنتجات</h3>
+            <div class="row" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+                <!-- Product Card Example -->
+                <div class="product-card" style="background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+                    <div style="height: 300px; background: #222; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-shirt fa-5x text-white-50"></i>
+                    </div>
+                    <div class="p-3">
+                        <h5 class="fw-bold mb-1">قميص كاجوال فاخر</h5>
+                        <p class="small text-muted mb-2">أزياء شتوية</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary">850 ج.م</span>
+                            <button style="background: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card" style="background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
+                    <div style="height: 300px; background: #222; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-user-tie fa-5x text-white-50"></i>
+                    </div>
+                    <div class="p-3">
+                        <h5 class="fw-bold mb-1">تيشرت قطني أسود</h5>
+                        <p class="small text-muted mb-2">أساسيات</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary">450 ج.م</span>
+                            <button style="background: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i> إضافة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <script type="module">
-        import { auth, signInWithEmailAndPassword } from './firebase-config.js';
-        import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    <nav class="bottom-nav d-md-none">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#shop" class="nav-item">
+            <i class="fa-solid fa-shop"></i>
+            <span>المتجر</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-heart"></i>
+            <span>المفضلة</span>
+        </a>
+        <a href="admin-login.html" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>حسابي</span>
+        </a>
+    </nav>
 
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const submitBtn = e.target.querySelector('button');
-
-            const originalBtnContent = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري التحقق...';
-            submitBtn.disabled = true;
-
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> تم بنجاح';
-                setTimeout(() => window.location.href = 'dashboard.html', 1000);
-            } catch (error) {
-                alert('فشل تسجيل الدخول: ' + error.message);
-                submitBtn.innerHTML = originalBtnContent;
-                submitBtn.disabled = false;
-            }
-        });
-
-        window.loginWithGoogle = async () => {
-            const provider = new GoogleAuthProvider();
-            try {
-                await signInWithPopup(auth, provider);
-                window.location.href = 'dashboard.html';
-            } catch (error) {
-                alert('فشل تسجيل الدخول عبر Google: ' + error.message);
-            }
-        };
-
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-          });
-        }
-    </script>
 </body>
 </html>
