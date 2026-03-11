@@ -1,0 +1,32 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Local server config
+node_modules/
+package-lock.json
+
+# Admin Panel Files (Now tracked)
+
+# Deployment files
+deployment/
+*.zip
+
+# Sensitive files (NEVER UPLOAD!)
+serviceAccountKey.json
+.env
+
+# Local scripts
+server.js
+sync_orders.js
+run_sync.bat
+silent_update.vbs
+update_report.bat
+
+# Reports
+*.xlsx
+last_update.txt

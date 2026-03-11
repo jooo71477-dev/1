@@ -3,10 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICLOTH | متجر الملابس العصرية</title>
+    <title>EL FAGER | متجر الملابس والجيمنج</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="store.css">
+    <style>
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img {
+            height: 300px;
+            background: #1a1a1a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        .add-to-cart-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: var(--primary-color);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,16 +59,23 @@
         <div class="header-container">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="ماذا تبحث عن اليوم؟">
+                <input type="text" placeholder="ابحث عن مظهرك القادم...">
             </div>
             
             <div class="logo">
-                <a href="index.html" style="text-decoration: none;"><h1>ICLOTH</h1></a>
+                <h1 style="cursor:pointer;" onclick="location.reload()">EL FAGER</h1>
             </div>
             
             <div class="header-icons">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <a href="admin-login.html" style="color: inherit;"><i class="fa-solid fa-user"></i></a>
+                <div style="position:relative;">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count" class="cart-count">0</span>
+                </div>
+                <!-- Customer Login with Google -->
+                <div class="d-flex align-items-center gap-2" id="user-pnl">
+                    <i class="fa-solid fa-user" onclick="loginWithGoogle()" style="cursor:pointer;"></i>
+                    <span id="auth-text" class="small fw-bold" style="cursor:pointer;" onclick="loginWithGoogle()">دخول</span>
+                </div>
             </div>
         </div>
     </header>
@@ -32,84 +84,44 @@
         <section class="hero">
             <div class="hero-card">
                 <div class="hero-content">
-                    <h2>تشكيلة الشتاء<br> الجديدة 2026</h2>
-                    <p>اكتشف أحدث صيحات الموضة العالمية بجودة مصرية فاخرة. أناقة بلا حدود وتصاميم تواكب العصر.</p>
-                    <a href="#shop" class="cta-btn">تسوق الآن <i class="fa-solid fa-arrow-left ms-2"></i></a>
-                </div>
-                <!-- Optional: Use generate_image to create a background image if needed -->
-                <div class="hero-image">
-                    <i class="fa-solid fa-clothing-conditioner fa-10x" style="opacity: 0.1;"></i>
+                    <h2 class="fw-black">EL FAGER<br>STYLE & POWER</h2>
+                    <p>المكان الذي تلتقي فيه الموضة بالجيمنج. عروض حصرية لفترة محدودة على تشكيلة الشتاء.</p>
+                    <a href="#shop" class="cta-btn">اكتشف المجموعة <i class="fa-solid fa-arrow-left ms-2"></i></a>
                 </div>
             </div>
         </section>
 
-        <section class="categories">
-            <h3 class="section-title">الأقسام الأعلى طلباً</h3>
-            <div class="category-row">
-                <div class="cat-item active">الكل</div>
-                <div class="cat-item">قمصان</div>
-                <div class="cat-item">تشيرتات</div>
-                <div class="cat-item">بناطيل</div>
-                <div class="cat-item">أحذية</div>
-                <div class="cat-item">ساعات</div>
-                <div class="cat-item">إكسسوارات</div>
+        <section id="shop" class="categories">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="section-title m-0">كل المنتجات</h3>
+                <div class="category-row m-0">
+                    <div class="cat-item active">الكل</div>
+                    <div class="cat-item">هوديز</div>
+                    <div class="cat-item">تيشرتات</div>
+                </div>
+            </div>
+            <div id="shop-grid" class="row" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+                <!-- Products via JS -->
+                 <div class="text-center py-5 opacity-50">جاري تحميل المعرض...</div>
             </div>
         </section>
 
         <section class="ad-grid">
             <div class="ad-box red">
-                <h3>خصم يصل إلى<br> 50%</h3>
-                <p>على جميع المجموعات المختارة</p>
-                <a href="#" class="text-white mt-3 fw-bold">تسوق العروض</a>
+                <h3>تتبع طلباتك</h3>
+                <p>سجل دخول بجوجل لمتابعة حالة شحنتك لحظة بلحظة</p>
+                <button onclick="loginWithGoogle()" class="btn btn-outline-light mt-3 w-fit">دخول سريع</button>
             </div>
             <div class="ad-box dark">
-                <h3>الأكثر<br> مبيعاً</h3>
-                <p>تعرف على ما يفضله عملاؤنا</p>
-                <a href="#" class="text-white mt-3 fw-bold">اكتشف الآن</a>
-            </div>
-        </section>
-
-        <section id="shop" class="categories">
-            <h3 class="section-title">أحدث المنتجات</h3>
-            <div class="row" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
-                <!-- Product Card Example -->
-                <div class="product-card" style="background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
-                    <div style="height: 300px; background: #222; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-shirt fa-5x text-white-50"></i>
-                    </div>
-                    <div class="p-3">
-                        <h5 class="fw-bold mb-1">قميص كاجوال فاخر</h5>
-                        <p class="small text-muted mb-2">أزياء شتوية</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="fw-bold text-primary">850 ج.م</span>
-                            <button style="background: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer;">
-                                <i class="fa-solid fa-plus"></i> إضافة
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" style="background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--border);">
-                    <div style="height: 300px; background: #222; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-user-tie fa-5x text-white-50"></i>
-                    </div>
-                    <div class="p-3">
-                        <h5 class="fw-bold mb-1">تيشرت قطني أسود</h5>
-                        <p class="small text-muted mb-2">أساسيات</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="fw-bold text-primary">450 ج.م</span>
-                            <button style="background: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer;">
-                                <i class="fa-solid fa-plus"></i> إضافة
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <h3>إدارة النظام</h3>
+                <p>قسم الإدارة للمديرين فقط</p>
+                <a href="dashboard.html" class="text-white mt-3 fw-bold">لوحة التحكم <i class="fa-solid fa-lock"></i></a>
             </div>
         </section>
     </main>
 
-    <nav class="bottom-nav d-md-none">
-        <a href="index.html" class="nav-item active">
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
             <i class="fa-solid fa-house"></i>
             <span>الرئيسية</span>
         </a>
@@ -118,14 +130,23 @@
             <span>المتجر</span>
         </a>
         <a href="#" class="nav-item">
-            <i class="fa-solid fa-heart"></i>
-            <span>المفضلة</span>
+            <i class="fa-solid fa-truck"></i>
+            <span>طلباتي</span>
         </a>
-        <a href="admin-login.html" class="nav-item">
+        <a href="#" onclick="loginWithGoogle()" class="nav-item">
             <i class="fa-solid fa-user"></i>
             <span>حسابي</span>
         </a>
     </nav>
 
+    <script type="module" src="js/store-logic.js"></script>
+    <script>
+        // Global helper for simple things
+        window.addEventListener('scroll', () => {
+            const h = document.querySelector('header');
+            if(window.scrollY > 10) h.style.background = "rgba(5,5,5,1)";
+            else h.style.background = "rgba(5,5,5,0.8)";
+        });
+    </script>
 </body>
 </html>
